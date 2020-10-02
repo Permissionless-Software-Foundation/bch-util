@@ -13,21 +13,49 @@ const UtilLib = require('../../lib/util')
 const uut = new UtilLib()
 
 describe('#util.js', () => {
-  describe('#getBchData', () => {
-    it('should get BCH data on an address', async () => {
-      const addr = 'bitcoincash:qp3sn6vlwz28ntmf3wmyra7jqttfx7z6zgtkygjhc7'
+  describe('#findBiggestUtxo', () => {
+    it('should sort UTXOs from Electrumx', async () => {
+      const addr = 'bitcoincash:qq54fgjn3hz0357n8a6guy4demw9xfkjk5jcj0xr0z'
 
-      const bchData = await uut.getBchData(addr)
+      const electrumxUtxos = await uut.bchjs.Electrumx.utxo(addr)
+      // console.log(`Electrumx utxos: ${JSON.stringify(electrumxUtxos, null, 2)}`)
 
-      // Assert that top-level properties exist.
-      assert.property(bchData, 'balance')
-      assert.property(bchData, 'utxos')
+      const result = uut.findBiggestUtxo(electrumxUtxos.utxos)
+      // console.log(`result: ${JSON.stringify(result, null, 2)}`)
 
-      // Assert essential UTXOs properties exist.
-      assert.isArray(bchData.utxos)
-      assert.property(bchData.utxos[0], 'txid')
-      assert.property(bchData.utxos[0], 'vout')
-      assert.property(bchData.utxos[0], 'satoshis')
+      assert.property(result, 'satoshis')
+      assert.equal(result.satoshis, 800)
+    })
+
+    it('should sort UTXOs from Blockbook', async () => {
+      const addr = 'bitcoincash:qq54fgjn3hz0357n8a6guy4demw9xfkjk5jcj0xr0z'
+
+      const blockbookUtxos = await uut.bchjs.Blockbook.utxo(addr)
+      // console.log(`Blockbook utxos: ${JSON.stringify(blockbookUtxos, null, 2)}`)
+
+      const result = uut.findBiggestUtxo(blockbookUtxos)
+      // console.log(`result: ${JSON.stringify(result, null, 2)}`)
+
+      assert.property(result, 'satoshis')
+      assert.equal(result.satoshis, 800)
     })
   })
+
+  // describe('#getBchData', () => {
+  //   it('should get BCH data on an address', async () => {
+  //     const addr = 'bitcoincash:qp3sn6vlwz28ntmf3wmyra7jqttfx7z6zgtkygjhc7'
+  //
+  //     const bchData = await uut.getBchData(addr)
+  //
+  //     // Assert that top-level properties exist.
+  //     assert.property(bchData, 'balance')
+  //     assert.property(bchData, 'utxos')
+  //
+  //     // Assert essential UTXOs properties exist.
+  //     assert.isArray(bchData.utxos)
+  //     assert.property(bchData.utxos[0], 'txid')
+  //     assert.property(bchData.utxos[0], 'vout')
+  //     assert.property(bchData.utxos[0], 'satoshis')
+  //   })
+  // })
 })

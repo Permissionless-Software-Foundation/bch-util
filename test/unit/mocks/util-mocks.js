@@ -6,32 +6,58 @@
 
 'use strict'
 
-const mockBalance = {
-  page: 1,
-  totalPages: 1,
-  itemsOnPage: 1000,
-  address: 'bitcoincash:qp3sn6vlwz28ntmf3wmyra7jqttfx7z6zgtkygjhc7',
-  balance: '1000',
-  totalReceived: '1000',
-  totalSent: '0',
-  unconfirmedBalance: '0',
-  unconfirmedTxs: 0,
-  txs: 1,
-  txids: ['6181c669614fa18039a19b23eb06806bfece1f7514ab457c3bb82a40fe171a6d']
+const electrumxUtxos = {
+  success: true,
+  utxos: [
+    {
+      height: 0,
+      tx_hash:
+        '192f5037bb3822afd92d6b6ab51842a5dcfbe6bff783290057342da1f27ed414',
+      tx_pos: 0,
+      value: 600
+    },
+    {
+      height: 0,
+      tx_hash:
+        'f913646f7c180f8de020cb1387951272e8a3f764a0f88e68f7fc1145a0bf02e9',
+      tx_pos: 0,
+      value: 700
+    },
+    {
+      height: 0,
+      tx_hash:
+        '7a091716f8137e94f87e7760648cd34a17e32754ef95f7c7bda38a635c9b2b1b',
+      tx_pos: 0,
+      value: 800
+    }
+  ]
 }
 
-const mockUtxos = [
+const blockbookUtxos = [
   {
-    txid: '6181c669614fa18039a19b23eb06806bfece1f7514ab457c3bb82a40fe171a6d',
+    txid: '7a091716f8137e94f87e7760648cd34a17e32754ef95f7c7bda38a635c9b2b1b',
     vout: 0,
-    value: '1000',
-    height: 601861,
-    confirmations: 4560,
-    satoshis: 1000
+    value: '800',
+    confirmations: 0,
+    satoshis: 800
+  },
+  {
+    txid: 'f913646f7c180f8de020cb1387951272e8a3f764a0f88e68f7fc1145a0bf02e9',
+    vout: 0,
+    value: '700',
+    confirmations: 0,
+    satoshis: 700
+  },
+  {
+    txid: '192f5037bb3822afd92d6b6ab51842a5dcfbe6bff783290057342da1f27ed414',
+    vout: 0,
+    value: '600',
+    confirmations: 0,
+    satoshis: 600
   }
 ]
 
 module.exports = {
-  mockBalance,
-  mockUtxos
+  electrumxUtxos,
+  blockbookUtxos
 }
