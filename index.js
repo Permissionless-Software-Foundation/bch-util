@@ -14,7 +14,7 @@ const util = new Util()
 
 let _this // local global for 'this'.
 
-class BoilplateLib {
+class BchUtil {
   constructor () {
     _this = this
 
@@ -23,4 +23,4 @@ class BoilplateLib {
   }
 }
 
-module.exports = BoilplateLib
+module.exports = BchUtil
