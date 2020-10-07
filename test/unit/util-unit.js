@@ -85,39 +85,104 @@ describe('#util.js', () => {
     })
   })
 
-  // describe('#getBchData', () => {
-  //   it('should throw error if address is not a string', async () => {
-  //     try {
-  //       const addr = 1234
-  //
-  //       await uut.getBchData(addr)
-  //
-  //       assert.equal(true, false, 'unexpected result')
-  //     } catch (err) {
-  //       assert.include(err.message, 'Address must be a string')
-  //     }
-  //   })
-  //
-  //   it('should get BCH data on an address', async () => {
-  //     // Mock external dependencies.
-  //     sandbox
-  //       .stub(uut.bchjs.Blockbook, 'balance')
-  //       .resolves(mockData.mockBalance)
-  //     sandbox.stub(uut.bchjs.Blockbook, 'utxo').resolves(mockData.mockUtxos)
-  //
-  //     const addr = 'bitcoincash:qp3sn6vlwz28ntmf3wmyra7jqttfx7z6zgtkygjhc7'
-  //
-  //     const bchData = await uut.getBchData(addr)
-  //
-  //     // Assert that top-level properties exist.
-  //     assert.property(bchData, 'balance')
-  //     assert.property(bchData, 'utxos')
-  //
-  //     // Assert essential UTXOs properties exist.
-  //     assert.isArray(bchData.utxos)
-  //     assert.property(bchData.utxos[0], 'txid')
-  //     assert.property(bchData.utxos[0], 'vout')
-  //     assert.property(bchData.utxos[0], 'satoshis')
-  //   })
-  // })
+  describe('#chunk20', () => {
+    it('should split 35 elements into 2 arrays', () => {
+      const result = uut.chunk20(mockData.thirtyFiveElements)
+      // console.log(`result: ${JSON.stringify(result, null, 2)}`)
+
+      assert.isArray(result)
+      assert.isArray(result[0])
+      assert.equal(result.length, 2)
+      assert.equal(result[0].length, 20)
+    })
+
+    it('should return accurately with an array of less than 20 elements', () => {
+      const elems = [0, 1, 2, 3, 4, 5]
+
+      const result = uut.chunk20(elems)
+      // console.log(`result: ${JSON.stringify(result, null, 2)}`)
+
+      assert.isArray(result)
+      assert.isArray(result[0])
+      assert.equal(result.length, 1)
+      assert.equal(result[0].length, 6)
+    })
+
+    it('should throw an error for non-array input', () => {
+      try {
+        uut.chunk20('string')
+
+        assert.equal(true, false, 'Unexpected result')
+      } catch (err) {
+        // console.log(err)
+        assert.include(err.message, 'input must be an array')
+      }
+    })
+  })
+
+  describe('#round8', () => {
+    it('should round a number to 8 decimals', () => {
+      const num = 1.234567891111
+
+      const result = uut.eightDecimals(num)
+      // console.log(result)
+
+      assert.equal(result, 1.23456789)
+    })
+
+    it('should throw an error for non-number input', () => {
+      try {
+        const num = 'string'
+
+        uut.eightDecimals(num)
+
+        assert.equal(true, false, 'Unexpected result')
+      } catch (err) {
+        // console.log(err)
+        assert.include(err.message, 'input must be a number')
+      }
+    })
+
+    it('should not effect a number with less than 8 decimals', () => {
+      const num = 1.23
+
+      const result = uut.eightDecimals(num)
+      // console.log(result)
+
+      assert.equal(result, 1.23)
+    })
+  })
+
+  describe('#round2', () => {
+    it('should round a number to 2 decimals', () => {
+      const num = 1.234567891111
+
+      const result = uut.twoDecimals(num)
+      // console.log(result)
+
+      assert.equal(result, 1.23)
+    })
+
+    it('should throw an error for non-number input', () => {
+      try {
+        const num = 'string'
+
+        uut.twoDecimals(num)
+
+        assert.equal(true, false, 'Unexpected result')
+      } catch (err) {
+        // console.log(err)
+        assert.include(err.message, 'input must be a number')
+      }
+    })
+
+    it('should not effect a number with less than 8 decimals', () => {
+      const num = 1.2
+
+      const result = uut.twoDecimals(num)
+      // console.log(result)
+
+      assert.equal(result, 1.2)
+    })
+  })
 })
