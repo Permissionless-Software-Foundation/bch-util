@@ -57,7 +57,43 @@ npm install --save bch-util`
   */
 ```
 
+### chunk20
 
+```javascript
+  const bigArray = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26]
+
+  const chunked = bchUtil.chunk20(bigArray)
+
+  /*
+    chunked = [
+      [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19],
+      [20,21,22,23,24,25,26]
+    ]
+  */
+```
+
+### round8
+
+```javascript
+  const num = 1.234567891111
+
+  const result = bchUtil.eightDecimals(num)
+
+  /*
+    result = 1.23456789
+  */
+```
+
+### round2
+```javascript
+  const num = 1.234567891111
+
+  const result = bchUtil.eightDecimals(num)
+
+  /*
+    result = 1.23
+  */
+```
 
 # Licence
 [MIT](LICENSE.md)
