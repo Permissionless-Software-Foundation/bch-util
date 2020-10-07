@@ -1,6 +1,7 @@
 # bch-util
 
 A node.js npm library with commonly used functions for working with Bitcoin Cash.
+The library has 100% test coverage.
 
 - **findBiggestUtxo()** - Find the biggest UTXO from an array of UTXOs.
 - **eightDecimals()** - Round a number to 8 decimal places
@@ -8,7 +9,7 @@ A node.js npm library with commonly used functions for working with Bitcoin Cash
 - **chunk20()** - Convert a one-dimensional array into a two-dimensional array containing 20 elements each.
 
 ## Install
-npm install --save bch-util`
+`npm install --save bch-util`
 
 ## Usage
 
@@ -20,7 +21,7 @@ npm install --save bch-util`
 
 ### findBiggestUtxo()
 ```javascript
-  const utxos = utxos: [
+  const utxos = [
     {
       height: 0,
       tx_hash:
