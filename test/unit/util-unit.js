@@ -107,5 +107,82 @@ describe('#util.js', () => {
       assert.equal(result.length, 1)
       assert.equal(result[0].length, 6)
     })
+
+    it('should throw an error for non-array input', () => {
+      try {
+        uut.chunk20('string')
+
+        assert.equal(true, false, 'Unexpected result')
+      } catch (err) {
+        // console.log(err)
+        assert.include(err.message, 'input must be an array')
+      }
+    })
+  })
+
+  describe('#round8', () => {
+    it('should round a number to 8 decimals', () => {
+      const num = 1.234567891111
+
+      const result = uut.eightDecimals(num)
+      // console.log(result)
+
+      assert.equal(result, 1.23456789)
+    })
+
+    it('should throw an error for non-number input', () => {
+      try {
+        const num = 'string'
+
+        uut.eightDecimals(num)
+
+        assert.equal(true, false, 'Unexpected result')
+      } catch (err) {
+        // console.log(err)
+        assert.include(err.message, 'input must be a number')
+      }
+    })
+
+    it('should not effect a number with less than 8 decimals', () => {
+      const num = 1.23
+
+      const result = uut.eightDecimals(num)
+      // console.log(result)
+
+      assert.equal(result, 1.23)
+    })
+  })
+
+  describe('#round2', () => {
+    it('should round a number to 2 decimals', () => {
+      const num = 1.234567891111
+
+      const result = uut.twoDecimals(num)
+      // console.log(result)
+
+      assert.equal(result, 1.23)
+    })
+
+    it('should throw an error for non-number input', () => {
+      try {
+        const num = 'string'
+
+        uut.twoDecimals(num)
+
+        assert.equal(true, false, 'Unexpected result')
+      } catch (err) {
+        // console.log(err)
+        assert.include(err.message, 'input must be a number')
+      }
+    })
+
+    it('should not effect a number with less than 8 decimals', () => {
+      const num = 1.2
+
+      const result = uut.twoDecimals(num)
+      // console.log(result)
+
+      assert.equal(result, 1.2)
+    })
   })
 })
