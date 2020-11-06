@@ -7,19 +7,23 @@
 
 'use strict'
 
-const BCHJS = require('@psf/bch-js')
-
 const Util = require('./lib/util')
-const util = new Util()
 
 let _this // local global for 'this'.
 
 class BchUtil {
-  constructor () {
+  constructor (config) {
     _this = this
 
-    _this.bchjs = new BCHJS()
-    _this.util = util
+    // Ensure an instance of bch-js is passed in.
+    if (!config || !config.bchjs) {
+      throw new Error(
+        'bch-js instance must be passed in the config object when instantiating.'
+      )
+    }
+    this.bchjs = config.bchjs
+
+    _this.util = new Util(config)
   }
 }
 

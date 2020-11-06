@@ -15,8 +15,11 @@ The library has 100% test coverage.
 
 ### Instantiate
 ```javascript
+  const BCHJS = require('@psf/bch-js')
+  const bchjs = new BCHJS()
+
   const BchUtil = require('bch-util')
-  const bchUtil = new BchUtil()
+  const bchUtil = new BchUtil({bchjs})
 ```
 
 ### findBiggestUtxo()
@@ -45,7 +48,7 @@ The library has 100% test coverage.
     }
   ]
 
-  const selectedUtxo = bchUtil.findBiggestUtxo(utxos)
+  const selectedUtxo = bchUtil.util.findBiggestUtxo(utxos)
 
   /*
     selectedUtxos = {
@@ -63,7 +66,7 @@ The library has 100% test coverage.
 ```javascript
   const bigArray = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26]
 
-  const chunked = bchUtil.chunk20(bigArray)
+  const chunked = bchUtil.util.chunk20(bigArray)
 
   /*
     chunked = [
@@ -78,7 +81,7 @@ The library has 100% test coverage.
 ```javascript
   const num = 1.234567891111
 
-  const result = bchUtil.eightDecimals(num)
+  const result = bchUtil.util.eightDecimals(num)
 
   /*
     result = 1.23456789
@@ -89,7 +92,7 @@ The library has 100% test coverage.
 ```javascript
   const num = 1.234567891111
 
-  const result = bchUtil.eightDecimals(num)
+  const result = bchUtil.util.eightDecimals(num)
 
   /*
     result = 1.23
