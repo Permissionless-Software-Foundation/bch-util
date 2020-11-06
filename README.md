@@ -15,8 +15,11 @@ The library has 100% test coverage.
 
 ### Instantiate
 ```javascript
+  const BCHJS = require('@psf/bch-js')
+  const bchjs = new BCHJS()
+
   const BchUtil = require('bch-util')
-  const bchUtil = new BchUtil()
+  const bchUtil = new BchUtil({bchjs})
 ```
 
 ### findBiggestUtxo()
