@@ -124,7 +124,7 @@ describe('#util.js', () => {
     it('should round a number to 8 decimals', () => {
       const num = 1.234567891111
 
-      const result = uut.eightDecimals(num)
+      const result = uut.round8(num)
       // console.log(result)
 
       assert.equal(result, 1.23456789)
@@ -134,7 +134,7 @@ describe('#util.js', () => {
       try {
         const num = 'string'
 
-        uut.eightDecimals(num)
+        uut.round8(num)
 
         assert.equal(true, false, 'Unexpected result')
       } catch (err) {
@@ -146,7 +146,7 @@ describe('#util.js', () => {
     it('should not effect a number with less than 8 decimals', () => {
       const num = 1.23
 
-      const result = uut.eightDecimals(num)
+      const result = uut.round8(num)
       // console.log(result)
 
       assert.equal(result, 1.23)
@@ -157,7 +157,7 @@ describe('#util.js', () => {
     it('should round a number to 2 decimals', () => {
       const num = 1.234567891111
 
-      const result = uut.twoDecimals(num)
+      const result = uut.round2(num)
       // console.log(result)
 
       assert.equal(result, 1.23)
@@ -167,7 +167,7 @@ describe('#util.js', () => {
       try {
         const num = 'string'
 
-        uut.twoDecimals(num)
+        uut.round2(num)
 
         assert.equal(true, false, 'Unexpected result')
       } catch (err) {
@@ -179,7 +179,7 @@ describe('#util.js', () => {
     it('should not effect a number with less than 8 decimals', () => {
       const num = 1.2
 
-      const result = uut.twoDecimals(num)
+      const result = uut.round2(num)
       // console.log(result)
 
       assert.equal(result, 1.2)
