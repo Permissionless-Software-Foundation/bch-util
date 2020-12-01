@@ -4,8 +4,8 @@ A node.js npm library with commonly used functions for working with Bitcoin Cash
 The library has 100% test coverage.
 
 - **findBiggestUtxo()** - Find the biggest UTXO from an array of UTXOs.
-- **eightDecimals()** - Round a number to 8 decimal places
-- **twoDecimals()** - Round a number to 2 decimal places
+- **round8()** - Round a number down to 8 decimal places
+- **round2()** - Round a number down to 2 decimal places
 - **chunk20()** - Convert a one-dimensional array into a two-dimensional array containing 20 elements each.
 
 ## Install
@@ -81,7 +81,7 @@ The library has 100% test coverage.
 ```javascript
   const num = 1.234567891111
 
-  const result = bchUtil.util.eightDecimals(num)
+  const result = bchUtil.util.round8(num)
 
   /*
     result = 1.23456789
@@ -92,7 +92,7 @@ The library has 100% test coverage.
 ```javascript
   const num = 1.234567891111
 
-  const result = bchUtil.util.eightDecimals(num)
+  const result = bchUtil.util.round2(num)
 
   /*
     result = 1.23
