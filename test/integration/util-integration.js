@@ -8,9 +8,12 @@ const chai = require('chai')
 // Locally global variables.
 const assert = chai.assert
 
+const BCHJS = require('@psf/bch-js')
+const bchjs = new BCHJS()
+
 // Unit under test
 const UtilLib = require('../../lib/util')
-const uut = new UtilLib()
+const uut = new UtilLib({ bchjs })
 
 describe('#util.js', () => {
   describe('#findBiggestUtxo', () => {
@@ -21,19 +24,6 @@ describe('#util.js', () => {
       // console.log(`Electrumx utxos: ${JSON.stringify(electrumxUtxos, null, 2)}`)
 
       const result = uut.findBiggestUtxo(electrumxUtxos.utxos)
-      // console.log(`result: ${JSON.stringify(result, null, 2)}`)
-
-      assert.property(result, 'satoshis')
-      assert.equal(result.satoshis, 800)
-    })
-
-    it('should sort UTXOs from Blockbook', async () => {
-      const addr = 'bitcoincash:qq54fgjn3hz0357n8a6guy4demw9xfkjk5jcj0xr0z'
-
-      const blockbookUtxos = await uut.bchjs.Blockbook.utxo(addr)
-      // console.log(`Blockbook utxos: ${JSON.stringify(blockbookUtxos, null, 2)}`)
-
-      const result = uut.findBiggestUtxo(blockbookUtxos)
       // console.log(`result: ${JSON.stringify(result, null, 2)}`)
 
       assert.property(result, 'satoshis')
